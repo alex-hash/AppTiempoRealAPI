@@ -25,6 +25,11 @@ namespace API.Models {
 
         }
 
+        public static int CountEvento() {
+            return Handler.DB.Evento.ToList().Count;
+
+        }
+
         public static bool ModificarCuotaEvento(int idEvento, float nuevaCuota) {
             //Modifica la cuota de un evento
             DAL.Evento evento = Handler.DB.Evento.Where(e => e.idEvento == idEvento).FirstOrDefault();
@@ -32,6 +37,7 @@ namespace API.Models {
             {
                 evento.cuota = nuevaCuota;
                 Handler.DB.SaveChanges();
+                System.Diagnostics.Debug.WriteLine($"Cambiada cuota de {idEvento} a {nuevaCuota}");
                 return true;
             } else
             {

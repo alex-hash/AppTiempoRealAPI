@@ -42,15 +42,16 @@ namespace API.LogicaHilos
 
         private void ActualizacionAutomaticaCuota()
         {
-            Thread.Sleep(5000);// aleatorio
+            
             while (1 == 1)
             {
+
                 //llamamos a funcion de modificar
                 try
                 {
 
                     Random numAleatorio = new Random();
-                    float num= numAleatorio.Next(10, 100);
+                    float num= (float)numAleatorio.Next(11, 50)/10;
                     EventoRepository.ModificarCuotaEvento(1, num);
                 }
                 catch (Exception ex)
