@@ -168,6 +168,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Handler.cs" />
+    <Compile Include="LogicaHilos\HiloActualizar.cs" />
     <Compile Include="Models\Apuesta.cs" />
     <Compile Include="Models\Evento.cs" />
     <Compile Include="Models\Repository\EventoRepository.cs" />
