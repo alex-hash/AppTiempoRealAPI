@@ -31,6 +31,7 @@ namespace API.Models {
             if (evento != null)
             {
                 evento.cuota = nuevaCuota;
+                Handler.DB.SaveChanges();
                 return true;
             } else
             {

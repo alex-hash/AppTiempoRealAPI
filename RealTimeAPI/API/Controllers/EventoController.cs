@@ -17,5 +17,9 @@ namespace API.Controllers {
         public Evento Get(int id) {
             return EventoRepository.ObtenerEvento(id);
         }
+
+        public bool Put(int id, float nuevaCuota) {
+            return EventoRepository.ModificarCuotaEvento(id, nuevaCuota);
+        }
     }
 }

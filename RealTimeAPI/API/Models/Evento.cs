@@ -24,6 +24,7 @@ namespace API.Models {
             this.resultado = resultado;
         }
         public Evento(DAL.Evento model) {
+            this.id = model.idEvento;
             this.nombre = model.nombre;
             this.fecha = model.fecha;
             this.cuota = (float)model.cuota;
