@@ -170,8 +170,10 @@
     <Compile Include="Handler.cs" />
     <Compile Include="Models\Apuesta.cs" />
     <Compile Include="Models\Evento.cs" />
+    <Compile Include="Models\Repository\EventoRepository.cs" />
+    <Compile Include="Models\ModelExtensions.cs" />
     <Compile Include="Models\Jugador.cs" />
-    <Compile Include="Models\JugadorRepository.cs" />
+    <Compile Include="Models\Repository\JugadorRepository.cs" />
     <Compile Include="Models\Monedero.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
