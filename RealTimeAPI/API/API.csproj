@@ -163,7 +163,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\JugadorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -171,8 +171,10 @@
     <Compile Include="LogicaHilos\HiloActualizar.cs" />
     <Compile Include="Models\Apuesta.cs" />
     <Compile Include="Models\Evento.cs" />
+    <Compile Include="Models\Repository\EventoRepository.cs" />
+    <Compile Include="Models\ModelExtensions.cs" />
     <Compile Include="Models\Jugador.cs" />
-    <Compile Include="Models\JugadorRepository.cs" />
+    <Compile Include="Models\Repository\JugadorRepository.cs" />
     <Compile Include="Models\Monedero.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

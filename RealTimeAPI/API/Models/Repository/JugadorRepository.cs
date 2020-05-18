@@ -4,14 +4,15 @@ using System.Linq;
 using System.Web;
 
 namespace API.Models {
-    public class JugadorRepository {
-        public Jugador ObtenerJugador(string login, string pass) {
+    public static class JugadorRepository {
+        public static Jugador ObtenerJugador(string login, string pass) {
             DAL.Jugador jugador = Handler.DB.Jugador.Where(j => j.login == login).FirstOrDefault();
-            if (login!=null)
+            if (jugador!=null)
             {
                 if (jugador.password == pass)
                 {
                     //Login correcto
+                    jugador.password = null;
                     return new Jugador(jugador);
                 } else
                 {
@@ -19,6 +20,20 @@ namespace API.Models {
                     return null;
                 }
             } else
+            {
+                //Usuario no existe
+                return null;
+            }
+        }
+
+        public static Jugador ObtenerJugador(int id) {
+            DAL.Jugador jugador = Handler.DB.Jugador.Where(j => j.idJugador == id).FirstOrDefault();
+            if (jugador!= null)
+            {
+                jugador.password = null;
+                return new Jugador( jugador );
+            }
+            else
             {
                 //Usuario no existe
                 return null;

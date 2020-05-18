@@ -1,4 +1,6 @@
-﻿using API.LogicaHilos;
+
+﻿using API.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,26 +11,19 @@ using System.Web.Http;
 namespace API.Controllers {
     public class EventoController : ApiController {
         // GET api/<controller>
-       
-        public IEnumerable<string> Get() {
-            return new string[] { "value1", "value2" };
+
+        public List<Evento> Get() {
+            return EventoRepository.ObtenerEventos();
+
         }
 
         // GET api/<controller>/5
-        public string Get(int id) {
-            return "value";
+        public Evento Get(int id) {
+            return EventoRepository.ObtenerEvento(id);
         }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value) {
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value) {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id) {
+        public bool Put(int id, float nuevaCuota) {
+            return EventoRepository.ModificarCuotaEvento(id, nuevaCuota);
         }
     }
 }
