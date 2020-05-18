@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using API.Models;
+using DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,12 +48,14 @@ namespace API.LogicaHilos
                 //llamamos a funcion de modificar
                 try
                 {
-                    //funcionmodificarCuota
 
+                    Random numAleatorio = new Random();
+                    float num= numAleatorio.Next(10, 100);
+                    EventoRepository.ModificarCuotaEvento(1, num);
                 }
                 catch (Exception ex)
                 {
-                   
+
                 }
                 
             }
