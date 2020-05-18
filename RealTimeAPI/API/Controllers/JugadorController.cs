@@ -15,7 +15,7 @@ namespace API.Controllers {
         }
 
         // GET api/Jugador/login&pass
-        public Jugador Login(string login, string pass) {
+        public Jugador GetLogin(string login, string pass) {
             return JugadorRepository.ObtenerJugador(login, pass);
         }
 
