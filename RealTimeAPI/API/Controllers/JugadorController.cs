@@ -20,7 +20,12 @@ namespace API.Controllers {
         }
 
         // POST api/values
-        public Jugador Post([FromBody]Jugador jugador) {
+        public Jugador Post([FromBody]dynamic model) {
+            string nombre = model["nombre"];
+            string apellido = model["apellido"];
+            string login = model["login"];
+            string password = model["password"];
+            Jugador jugador = new Jugador(nombre, apellido, login, password);
             return JugadorRepository.NuevoJugador(jugador);
         }
 
