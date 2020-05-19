@@ -5,11 +5,11 @@ using System.Web;
 
 namespace API.Models.Repository {
     public static class MonederoRespository {
-        public static Monedero NuevoMonedero(int idJugador) {
+        public static Monedero NuevoMonedero(int idJugador, decimal saldo = 0m) {
             try
             {
                 var db = Handler.DB;
-                db.Monedero.Add(new Monedero(idJugador, 0).ToModel() );
+                db.Monedero.Add(new Monedero(idJugador, saldo).ToModel());
                 db.SaveChanges();
                 return ObtenerMonedero(idJugador);
             }
