@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PlexusDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Apuesta">
+          <Key>
+            <PropertyRef Name="idApuesta" />
+          </Key>
+          <Property Name="idApuesta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idEvento" Type="int" Nullable="false" />
+          <Property Name="idJugador" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+          <Property Name="prediccion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="resultado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Evento">
+          <Key>
+            <PropertyRef Name="idEvento" />
+          </Key>
+          <Property Name="idEvento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+          <Property Name="cuota" Type="float" Nullable="false" />
+          <Property Name="resultado" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Jugador">
+          <Key>
+            <PropertyRef Name="idJugador" />
+          </Key>
+          <Property Name="idJugador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellido" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Monedero">
+          <Key>
+            <PropertyRef Name="idMonedero" />
+          </Key>
+          <Property Name="idMonedero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idJugador" Type="int" Nullable="false" />
+          <Property Name="saldo" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Apuesta_Evento">
+          <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
+          <End Role="Apuesta" Type="Self.Apuesta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evento">
+              <PropertyRef Name="idEvento" />
+            </Principal>
+            <Dependent Role="Apuesta">
+              <PropertyRef Name="idEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Apuesta_Jugador">
+          <End Role="Jugador" Type="Self.Jugador" Multiplicity="1" />
+          <End Role="Apuesta" Type="Self.Apuesta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jugador">
+              <PropertyRef Name="idJugador" />
+            </Principal>
+            <Dependent Role="Apuesta">
+              <PropertyRef Name="idJugador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Monedero_Jugador">
+          <End Role="Jugador" Type="Self.Jugador" Multiplicity="1" />
+          <End Role="Monedero" Type="Self.Monedero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jugador">
+              <PropertyRef Name="idJugador" />
+            </Principal>
+            <Dependent Role="Monedero">
+              <PropertyRef Name="idJugador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PlexusDBModelStoreContainer">
+          <EntitySet Name="Apuesta" EntityType="Self.Apuesta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Evento" EntityType="Self.Evento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jugador" EntityType="Self.Jugador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Monedero" EntityType="Self.Monedero" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Apuesta_Evento" Association="Self.FK_Apuesta_Evento">
+            <End Role="Evento" EntitySet="Evento" />
+            <End Role="Apuesta" EntitySet="Apuesta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Apuesta_Jugador" Association="Self.FK_Apuesta_Jugador">
+            <End Role="Jugador" EntitySet="Jugador" />
+            <End Role="Apuesta" EntitySet="Apuesta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Monedero_Jugador" Association="Self.FK_Monedero_Jugador">
+            <End Role="Jugador" EntitySet="Jugador" />
+            <End Role="Monedero" EntitySet="Monedero" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PlexusDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Apuesta">
+          <Key>
+            <PropertyRef Name="idApuesta" />
+          </Key>
+          <Property Name="idApuesta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idEvento" Type="Int32" Nullable="false" />
+          <Property Name="idJugador" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="prediccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="resultado" Type="Boolean" />
+          <NavigationProperty Name="Evento" Relationship="Self.FK_Apuesta_Evento" FromRole="Apuesta" ToRole="Evento" />
+          <NavigationProperty Name="Jugador" Relationship="Self.FK_Apuesta_Jugador" FromRole="Apuesta" ToRole="Jugador" />
+        </EntityType>
+        <EntityType Name="Evento">
+          <Key>
+            <PropertyRef Name="idEvento" />
+          </Key>
+          <Property Name="idEvento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cuota" Type="Double" Nullable="false" />
+          <Property Name="resultado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Apuesta" Relationship="Self.FK_Apuesta_Evento" FromRole="Evento" ToRole="Apuesta" />
+        </EntityType>
+        <EntityType Name="Jugador">
+          <Key>
+            <PropertyRef Name="idJugador" />
+          </Key>
+          <Property Name="idJugador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Apuesta" Relationship="Self.FK_Apuesta_Jugador" FromRole="Jugador" ToRole="Apuesta" />
+          <NavigationProperty Name="Monedero" Relationship="Self.FK_Monedero_Jugador" FromRole="Jugador" ToRole="Monedero" />
+        </EntityType>
+        <EntityType Name="Monedero">
+          <Key>
+            <PropertyRef Name="idMonedero" />
+          </Key>
+          <Property Name="idMonedero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idJugador" Type="Int32" Nullable="false" />
+          <Property Name="saldo" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Jugador" Relationship="Self.FK_Monedero_Jugador" FromRole="Monedero" ToRole="Jugador" />
+        </EntityType>
+        <Association Name="FK_Apuesta_Evento">
+          <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
+          <End Role="Apuesta" Type="Self.Apuesta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evento">
+              <PropertyRef Name="idEvento" />
+            </Principal>
+            <Dependent Role="Apuesta">
+              <PropertyRef Name="idEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Apuesta_Jugador">
+          <End Role="Jugador" Type="Self.Jugador" Multiplicity="1" />
+          <End Role="Apuesta" Type="Self.Apuesta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jugador">
+              <PropertyRef Name="idJugador" />
+            </Principal>
+            <Dependent Role="Apuesta">
+              <PropertyRef Name="idJugador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Monedero_Jugador">
+          <End Role="Jugador" Type="Self.Jugador" Multiplicity="1" />
+          <End Role="Monedero" Type="Self.Monedero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jugador">
+              <PropertyRef Name="idJugador" />
+            </Principal>
+            <Dependent Role="Monedero">
+              <PropertyRef Name="idJugador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PlexusDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Apuesta" EntityType="Self.Apuesta" />
+          <EntitySet Name="Evento" EntityType="Self.Evento" />
+          <EntitySet Name="Jugador" EntityType="Self.Jugador" />
+          <EntitySet Name="Monedero" EntityType="Self.Monedero" />
+          <AssociationSet Name="FK_Apuesta_Evento" Association="Self.FK_Apuesta_Evento">
+            <End Role="Evento" EntitySet="Evento" />
+            <End Role="Apuesta" EntitySet="Apuesta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Apuesta_Jugador" Association="Self.FK_Apuesta_Jugador">
+            <End Role="Jugador" EntitySet="Jugador" />
+            <End Role="Apuesta" EntitySet="Apuesta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Monedero_Jugador" Association="Self.FK_Monedero_Jugador">
+            <End Role="Jugador" EntitySet="Jugador" />
+            <End Role="Monedero" EntitySet="Monedero" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PlexusDBModelStoreContainer" CdmEntityContainer="PlexusDBEntities">
+          <EntitySetMapping Name="Apuesta">
+            <EntityTypeMapping TypeName="PlexusDBModel.Apuesta">
+              <MappingFragment StoreEntitySet="Apuesta">
+                <ScalarProperty Name="idApuesta" ColumnName="idApuesta" />
+                <ScalarProperty Name="idEvento" ColumnName="idEvento" />
+                <ScalarProperty Name="idJugador" ColumnName="idJugador" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="prediccion" ColumnName="prediccion" />
+                <ScalarProperty Name="resultado" ColumnName="resultado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Evento">
+            <EntityTypeMapping TypeName="PlexusDBModel.Evento">
+              <MappingFragment StoreEntitySet="Evento">
+                <ScalarProperty Name="idEvento" ColumnName="idEvento" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="cuota" ColumnName="cuota" />
+                <ScalarProperty Name="resultado" ColumnName="resultado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jugador">
+            <EntityTypeMapping TypeName="PlexusDBModel.Jugador">
+              <MappingFragment StoreEntitySet="Jugador">
+                <ScalarProperty Name="idJugador" ColumnName="idJugador" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Monedero">
+            <EntityTypeMapping TypeName="PlexusDBModel.Monedero">
+              <MappingFragment StoreEntitySet="Monedero">
+                <ScalarProperty Name="idMonedero" ColumnName="idMonedero" />
+                <ScalarProperty Name="idJugador" ColumnName="idJugador" />
+                <ScalarProperty Name="saldo" ColumnName="saldo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
