@@ -24,7 +24,8 @@ namespace API.Models {
             this.password = model.password;
         }
 
-        public Jugador(string nombre, string apellido, string login, string password) { 
+        public Jugador(string nombre, string apellido, string login, string password) {
+            this.id = 0;
             this.nombre = nombre;
             this.apellido = apellido;
             this.login = login;
