@@ -45,7 +45,6 @@ namespace API.LogicaHilos
             
             while (1 == 1)
             {
-
                 //llamamos a funcion de modificar
                 try
                 {

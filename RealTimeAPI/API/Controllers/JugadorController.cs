@@ -20,13 +20,13 @@ namespace API.Controllers {
         }
 
         // POST api/values
-        public void Post([FromBody]Jugador jugador) {
-            //TODO: Creacion del jugador
+        public Jugador Post([FromBody]Jugador jugador) {
+            return JugadorRepository.NuevoJugador(jugador);
         }
 
-        // PUT api/values/5
-        public void Put(int id, [FromBody]string value) {
-            //TODO:
+        public Jugador Post(string nombre, string apellido, string login, string password) {
+            return JugadorRepository.NuevoJugador(nombre, apellido, login, password);
         }
+
     }
 }

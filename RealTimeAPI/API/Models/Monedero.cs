@@ -13,8 +13,8 @@ namespace API.Models {
         public int IdJugador { get => idJugador; set => idJugador = value; }
         public decimal Saldo { get => saldo; set => saldo = value; }
 
-        public Monedero(int idMonedero, int idJugador, decimal saldo) {
-            this.idMonedero = idMonedero;
+        public Monedero(int idJugador, decimal saldo) {
+            this.idMonedero = 0;
             this.idJugador = idJugador;
             this.saldo = saldo;
         }
