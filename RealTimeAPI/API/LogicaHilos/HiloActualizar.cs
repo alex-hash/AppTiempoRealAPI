@@ -20,7 +20,7 @@ namespace API.LogicaHilos
         }
         public void IniciarHiloGeneral()
         {
-            this.HiloGeneral = new Thread(new ThreadStart(() => SistemaCentralHilos()));
+            this.HiloGeneral = new Thread(new ThreadStart(() => SistemaCentralHilos())); //creamos un hilos primario
             this.HiloGeneral.Start();
         }
         public void SistemaCentralHilos()
@@ -35,7 +35,7 @@ namespace API.LogicaHilos
         public void IniciarHiloUpdateCuota()
         {
             
-            this.HiloUpdateCuota = new Thread(new ThreadStart(() => ActualizacionAutomaticaCuota()));
+            this.HiloUpdateCuota = new Thread(new ThreadStart(() => ActualizacionAutomaticaCuota())); //de ese hilo primario creamos el hilo para realizar la actualizacion
             this.HiloUpdateCuota.Start();
 
         }
@@ -45,13 +45,27 @@ namespace API.LogicaHilos
             
             while (1 == 1)
             {
+
+                Thread.Sleep(5000);
                 //llamamos a funcion de modificar
                 try
                 {
-
+                  
+                    int numeroTotalEventos=EventoRepository.CountEvento(); //buscamos el total de id
                     Random numAleatorio = new Random();
-                    float num= (float)numAleatorio.Next(11, 50)/10;
-                    EventoRepository.ModificarCuotaEvento(1, num);
+                    int numeroTotalEventosModificar = numAleatorio.Next(1, numeroTotalEventos);//generamos aleatoriamente el numero de eventos totales que modificaremos
+                    for(int i = 0; i <= numeroTotalEventosModificar; i++)
+                    {
+                        Random numRevento = new Random();
+                        int numeroEvento = numRevento.Next(1, numeroTotalEventos);//seleccionamos de forma aleatoria que evento se modificara
+                        Random numCuotaAleatoria = new Random();
+                        float num = (float)numCuotaAleatoria.Next(11, 50) / 10;//se genera de forma aleatoria la cuota que se cambiara
+                        EventoRepository.ModificarCuotaEvento(numeroEvento, num);//modificamos cuota
+                       
+
+                    }
+                    
+
                 }
                 catch (Exception ex)
                 {
@@ -63,28 +77,3 @@ namespace API.LogicaHilos
     }
 }
 
-/*
- *  try
-            {
-                using (var DB = new Tema9Ejercicio8Entities())
-                {
-                    int idComprobar = this.IdJugador;
-                    
-                        var jugadorModificar = DB.JUGADORDB.Where(x => x.IdJugador == idComprobar).ToList();
-                    jugadorModificar[0].Nombre = nuevoNombre;
-                    jugadorModificar[0].Apellido = nuevoApellido;
-                     
-
-                        DB.SaveChanges();
-                        return new Respuesta<Jugador>(TipoRespuesta.Exito, null, "Modificado jugador con exito");
-                   
-
-                }
-
-            }
-            catch (Exception ex)
-            {
-                return new Respuesta<Jugador>(TipoRespuesta.Error, null, "Error al modificar jugador " + ex.Message);
-            }
- 
-     */
