@@ -20,8 +20,10 @@ namespace API.Controllers
             //id = idJugador
             try
             {
-                int idJugador = Int32.Parse( model["idJugador"] );
-                decimal saldo = decimal.Parse( model["saldo"] );
+                string id = model["idJugador"];
+                string saldoS = model["saldo"];
+                int idJugador = Int32.Parse(id);
+                decimal saldo = decimal.Parse(saldoS);
                 return MonederoRespository.NuevoMonedero(idJugador, saldo);
             }
             catch (Exception ex)
